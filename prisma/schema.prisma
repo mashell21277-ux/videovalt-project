@@ -1,0 +1,136 @@
+generator client {
+
+  provider = "prisma-client-js"
+
+}
+
+
+
+datasource db {
+
+  provider = "mysql"
+
+  url      = env("DATABASE_URL")
+
+}
+
+
+
+enum VideoCategory {
+
+  ENTERTAINMENT
+
+  EDUCATION
+
+  MUSIC
+
+  SPORTS
+
+}
+
+
+
+enum VideoType {
+
+  VIDEO
+
+  REEL
+
+}
+
+
+
+model LiveProfile {
+
+  id        String           @id @default(uuid())
+
+  name      String
+
+  handle    String           @unique
+
+  avatarUrl String?
+
+  bio       String?          @db.Text
+
+  isVisible Boolean          @default(true)
+
+  createdAt DateTime         @default(now())
+
+  updatedAt DateTime         @updatedAt
+
+  videos    Video[]
+
+  messages  ProfileMessage[]
+
+}
+
+
+
+model ProfileMessage {
+
+  id         String      @id @default(uuid())
+
+  profileId  String
+
+  profile    LiveProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  authorName String
+
+  content    String      @db.Text
+
+  createdAt  DateTime    @default(now())
+
+}
+
+
+
+model AppNotification {
+
+  id        String   @id @default(uuid())
+
+  title     String
+
+  body      String   @db.Text
+
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+
+}
+
+
+
+model Video {
+
+  id          String        @id @default(uuid())
+
+  title       String
+
+  description String?
+
+  filename    String?
+
+  sourceUrl   String?
+
+  thumbnail   String?
+
+  category    VideoCategory
+
+  type        VideoType     @default(VIDEO)
+
+  duration    Int?
+
+  fileSize    Int?
+
+  isLive      Boolean       @default(false)
+
+  profileId   String?
+
+  profile     LiveProfile?  @relation(fields: [profileId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime      @default(now())
+
+  updatedAt   DateTime      @updatedAt
+
+}
+
