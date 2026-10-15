@@ -1,4 +1,4 @@
-import { CategoryColumn } from "@/components/CategoryColumn";
+﻿import { CategoryColumn } from "@/components/CategoryColumn";
 import { CATEGORIES } from "@/lib/constants";
 
 export default function HomePage() {
@@ -11,6 +11,20 @@ export default function HomePage() {
         <p className="mt-2 text-zinc-400">
           Browse by category, download to watch offline anytime
         </p>
+
+        <div className="mt-6">
+          <a
+            href="https://drive.google.com/file/d/14XIJy6MkfVbcqInx386Fg4V6KqkuckSF/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+          >
+            📱 Download Android App
+          </a>
+          <p className="mt-2 text-sm text-zinc-400">
+            Get Video Vault for Android
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
